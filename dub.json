@@ -1,0 +1,17 @@
+{
+    "name": "derelict-gles",
+    "description": "A dynamic binding to the OpenGL ES library.",
+    "homepage": "https://github.com/DerelictOrg/DerelictGLES",
+    "license": "Boost",
+    "authors": [
+        "Ben Boeckel",
+        "Mike Parker"
+    ],
+
+    "targetName": "DerelictGLES",
+    "targetPath": "lib",
+
+    "dependencies": {
+        "derelict-util": ">=1.0.0"
+    }
+}
