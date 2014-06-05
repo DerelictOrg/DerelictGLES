@@ -320,9 +320,3 @@ __gshared {
     da_glVertexAttribPointer glVertexAttribPointer;
     da_glViewport glViewport;
 }
-
-__gshared DerelictGLES2Loader DerelictGLES2;
-
-shared static this() {
-    DerelictGLES2 = new DerelictGLES2Loader;
-}

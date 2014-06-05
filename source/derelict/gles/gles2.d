@@ -210,3 +210,9 @@ class DerelictGLES2Loader : SharedLibLoader
         }
     }
 }
+
+__gshared DerelictGLES2Loader DerelictGLES2;
+
+shared static this() {
+    DerelictGLES2 = new DerelictGLES2Loader;
+}
