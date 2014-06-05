@@ -130,7 +130,7 @@ extern( System ) nothrow {
     alias void function( GLfloat, GLboolean ) da_glSampleCoverage;
     alias void function( GLint, GLint, GLsizei, GLsizei ) da_glScissor;
     alias void function( GLsizei, const GLuint*, GLenum, const void*, GLsizei ) da_glShaderBinary;
-    alias void function( GLuint, GLsizei, const(const(GLchar)*)*, const GLint* ) da_glShaderSource;
+    alias void function( GLuint, GLsizei, const( const( GLchar )* )*, const GLint* ) da_glShaderSource;
     alias void function( GLenum, GLint, GLuint ) da_glStencilFunc;
     alias void function( GLenum, GLenum, GLint, GLuint ) da_glStencilFuncSeparate;
     alias void function( GLuint ) da_glStencilMask;
