@@ -48,6 +48,9 @@ package {
 
     bool isExtSupported( string name ) {
         const char* ext = glGetString( GL_EXTENSIONS );
+        if( !ext )
+            return false;
+
         auto res = strstr( ext, name.ptr );
 
         while( res ) {
