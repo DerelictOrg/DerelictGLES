@@ -103,7 +103,7 @@ extern( System ) nothrow {
     alias void function( GLuint, GLsizei, GLsizei*, GLchar*infoLog ) da_glGetShaderInfoLog;
     alias void function( GLenum, GLenum, GLint*, GLint* ) da_glGetShaderPrecisionFormat;
     alias void function( GLuint, GLsizei, GLsizei*, GLchar* ) da_glGetShaderSource;
-    alias const GLubyte* function( GLenum ) da_glGetString;
+    alias const char* function( GLenum ) da_glGetString;
     alias void function( GLenum, GLenum, GLfloat* ) da_glGetTexParameterfv;
     alias void function( GLenum, GLenum, GLint* ) da_glGetTexParameteriv;
     alias void function( GLuint, GLint, GLfloat* ) da_glGetUniformfv;
