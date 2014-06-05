@@ -27,13 +27,15 @@ DEALINGS IN THE SOFTWARE.
 */
 module derelict.gles.types2;
 
+struct __GLsync;
+
 alias GLbyte = byte;
 alias GLclampf = float;
 alias GLfixed = int;
 alias GLshort = short;
 alias GLushort = ushort;
 alias GLvoid = void;
-//alias GLsync = struct __GLsync*;
+alias GLsync = __GLsync*;
 alias GLint64 = long;
 alias GLuint64 = ulong;
 alias GLenum = uint;

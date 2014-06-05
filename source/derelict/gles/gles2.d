@@ -30,6 +30,7 @@ module derelict.gles.gles2;
 public {
     import derelict.gles.types2;
     import derelict.gles.constants2;
+    import derelict.gles.ext2;
     import derelict.gles.functions2;
 }
 
@@ -59,6 +60,8 @@ class DerelictGLES2Loader : SharedLibLoader
         }
 
         GLESVersion reload() {
+            loadEXT(  );
+
             return _loadedVersion;
         }
 

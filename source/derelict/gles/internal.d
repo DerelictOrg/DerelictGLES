@@ -30,12 +30,22 @@ module derelict.gles.internal;
 private {
     import core.stdc.string;
 
+    import derelict.util.exception;
+    //import derelict.egl.egl;
     import derelict.gles.types2;
     import derelict.gles.constants2;
     import derelict.gles.functions2;
 }
 
 package {
+    void bindGLFunc( void** ptr, string symName ) {
+        //auto sym = eglGetProcAddress( symName.ptr );
+        auto sym = null;
+        if( !sym )
+            throw new SymbolLoadException( "Failed to load OpenGL symbol [" ~ symName ~ "]" );
+        *ptr = sym;
+    }
+
     bool isExtSupported( string name ) {
         const char* ext = glGetString( GL_EXTENSIONS );
         auto res = strstr( ext, name.ptr );
