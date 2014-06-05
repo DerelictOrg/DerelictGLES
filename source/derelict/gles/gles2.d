@@ -59,6 +59,7 @@ class DerelictGLES2Loader : SharedLibLoader
         }
 
         GLESVersion reload() {
+            return _loadedVersion;
         }
 
         protected override void loadSymbols() {
