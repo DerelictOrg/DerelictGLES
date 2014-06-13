@@ -25,43 +25,39 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 
 */
-module derelict.gles.internal;
+module derelict.gles.eglplatform;
 
 private {
-    import core.stdc.string;
-
-    import derelict.util.exception;
-    import derelict.gles.egl;
-    import derelict.gles.types2;
-    import derelict.gles.constants2;
-    import derelict.gles.functions2;
+    import derelict.util.system;
 }
 
-package {
-    void bindGLFunc( void** ptr, string symName ) {
-        auto sym = eglGetProcAddress( symName.ptr );
-        if( !sym )
-            throw new SymbolLoadException( "Failed to load OpenGLES symbol [" ~ symName ~ "]" );
-        *ptr = sym;
-    }
+static if( Derelict_OS_Android ) {
+    alias EGLint = int;
 
-    bool isExtSupported( string name ) {
-        const char* ext = glGetString( GL_EXTENSIONS );
-        if( !ext )
-            return false;
+    struct ANativeWindow;
+    struct egl_native_pixmap_t;
 
-        auto res = strstr( ext, name.ptr );
+    alias EGLNativeWindowType = ANativeWindow*;
+    alias EGLNativePixmapType = egl_native_pixmap_t*;
+    alias EGLNativeDisplayType = void*;
+} else static if( Derelict_OS_Posix ) {
+    alias EGLint = int;
 
-        while( res ) {
-            // It's possible that the extension name is actually a
-            // substring of another extension. If not, then the
-            // character following the name in the extension string
-            // should be a space (or possibly the null character ).
-            if( res[ name.length ] == ' ' || res[ name.length ] == '\0' )
-                return true;
-            res = strstr( res + name.length, name.ptr );
-        }
+    // static if( wayland ) {
+    // struct wl_display;
+    // struct wl_egl_pixmap;
+    // struct wl_egl_window;
 
-        return false;
-    }
-}
+    // alias EGLNativeWindowType = wl_display*;
+    // alias EGLNativePixmapType = wl_egl_pixmap*;
+    // alias EGLNativeDisplayType = wl_egl_window*;
+    // } else {
+    // FIXME: Assume X for now.
+    struct Display;
+
+    alias EGLNativeWindowType = Display*;
+    alias EGLNativePixmapType = uint;
+    alias EGLNativeDisplayType = uint;
+    // }
+} else
+    static assert( 0, "Need to implement EGL types for this operating system." );

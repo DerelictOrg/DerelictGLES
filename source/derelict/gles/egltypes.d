@@ -25,43 +25,23 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 
 */
-module derelict.gles.internal;
+module derelict.gles.egltypes;
+
+public {
+    import derelict.gles.eglplatform;
+}
 
 private {
-    import core.stdc.string;
-
-    import derelict.util.exception;
-    import derelict.gles.egl;
-    import derelict.gles.types2;
-    import derelict.gles.constants2;
-    import derelict.gles.functions2;
+    import core.stdc.stdint;
 }
 
-package {
-    void bindGLFunc( void** ptr, string symName ) {
-        auto sym = eglGetProcAddress( symName.ptr );
-        if( !sym )
-            throw new SymbolLoadException( "Failed to load OpenGLES symbol [" ~ symName ~ "]" );
-        *ptr = sym;
-    }
-
-    bool isExtSupported( string name ) {
-        const char* ext = glGetString( GL_EXTENSIONS );
-        if( !ext )
-            return false;
-
-        auto res = strstr( ext, name.ptr );
-
-        while( res ) {
-            // It's possible that the extension name is actually a
-            // substring of another extension. If not, then the
-            // character following the name in the extension string
-            // should be a space (or possibly the null character ).
-            if( res[ name.length ] == ' ' || res[ name.length ] == '\0' )
-                return true;
-            res = strstr( res + name.length, name.ptr );
-        }
-
-        return false;
-    }
-}
+alias EGLBoolean = uint;
+alias EGLenum = uint;
+alias EGLConfig = void*;
+alias EGLContext = void*;
+alias EGLDisplay = void*;
+alias EGLSurface = void*;
+alias EGLClientBuffer = void*;
+alias EGLSync = void*;
+alias EGLAttrib = intptr_t;
+alias EGLTime = ulong;
