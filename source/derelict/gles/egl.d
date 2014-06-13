@@ -36,6 +36,7 @@ private {
     import derelict.util.loader;
     import derelict.util.exception;
     import derelict.util.system;
+    import std.conv;
 
     static if( Derelict_OS_Posix ) {
         enum libNames = "libEGL.so.1,libEGL.so";
@@ -420,14 +421,19 @@ class DerelictEGLLoader : SharedLibLoader
 
             EGLDisplay disp = eglGetDisplay( EGL_DEFAULT_DISPLAY );
             if( disp == EGL_NO_DISPLAY ) {
+                throw new DerelictException( "Unable to get a display for EGL" );
             }
             EGLint major;
             EGLint minor;
             if( eglInitialize( disp, &major, &minor ) == EGL_FALSE ) {
+                throw new DerelictException( "Failed to initialize the EGL display: " ~ to!string( eglGetError(  ) ) );
             }
-            eglTerminate( disp );
+            if( eglTerminate( disp ) == EGL_FALSE ) {
+                throw new DerelictException( "Failed to terminate the EGL display: " ~ to!string( eglGetError(  ) ) );
+            }
 
             if( major != 1 ) {
+                throw new DerelictException( "The EGL version is not recognized: " ~ to!string( eglGetError(  ) ) );
             }
 
             if( minor >= 0 ) {
