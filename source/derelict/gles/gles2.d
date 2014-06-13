@@ -42,7 +42,7 @@ private {
     static if( Derelict_OS_Posix ) {
         enum libNames = "libGLESv2.so.2,libGLESv2.so";
     } else
-        static assert( 0, "Need to implement OpenGL libNames for this operating system." );
+        static assert( 0, "Need to implement OpenGLESv2 libNames for this operating system." );
 }
 
 class DerelictGLES2Loader : SharedLibLoader
