@@ -428,11 +428,9 @@ class DerelictEGLLoader : SharedLibLoader
             if( eglInitialize( disp, &major, &minor ) == EGL_FALSE ) {
                 throw new DerelictException( "Failed to initialize the EGL display: " ~ to!string( eglGetError(  ) ) );
             }
-            if( eglTerminate( disp ) == EGL_FALSE ) {
-                throw new DerelictException( "Failed to terminate the EGL display: " ~ to!string( eglGetError(  ) ) );
-            }
 
             if( major != 1 ) {
+                eglTerminate( disp );
                 throw new DerelictException( "The EGL version is not recognized: " ~ to!string( eglGetError(  ) ) );
             }
 
@@ -498,7 +496,10 @@ class DerelictEGLLoader : SharedLibLoader
                 _loadedVersion = EGLVersion.EGL15;
             }
 
-            loadEXT(  );
+            loadEXT( disp );
+            if( eglTerminate( disp ) == EGL_FALSE ) {
+                throw new DerelictException( "Failed to terminate the EGL display: " ~ to!string( eglGetError(  ) ) );
+            }
         }
     }
 }
