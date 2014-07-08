@@ -285,7 +285,7 @@ extern( System ) nothrow {
     alias EGLDisplay function( EGLNativeDisplayType ) da_eglGetDisplay;
     alias EGLBoolean function( EGLDisplay, EGLint*, EGLint* ) da_eglInitialize;
     alias EGLBoolean function( EGLDisplay ) da_eglTerminate;
-    alias const char* function( EGLDisplay, EGLint ) da_eglQueryString;
+    alias const( char )* function( EGLDisplay, EGLint ) da_eglQueryString;
     alias EGLBoolean function( EGLDisplay, EGLConfig*,
                                EGLint, EGLint* ) da_eglGetConfigs;
     alias EGLBoolean function( EGLDisplay, const EGLint*,

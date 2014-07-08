@@ -46,16 +46,16 @@ package {
     }
 
     bool isExtSupported( string name ) {
-        const char* ext = glGetString( GL_EXTENSIONS );
-        return checkExt( ext, name );
+        const( GLubyte )* ext = glGetString( GL_EXTENSIONS );
+        return checkExt( cast( const( char )* ) ext, name );
     }
 
     bool isEGLExtSupported( EGLDisplay disp, string name ) {
-        const char* ext = eglQueryString( disp, EGL_EXTENSIONS );
+        const( char )* ext = eglQueryString( disp, EGL_EXTENSIONS );
         return checkExt( ext, name );
     }
 
-    bool checkExt( const char* ext, string name ) {
+    bool checkExt( const( char )* ext, string name ) {
         if( !ext )
             return false;
 

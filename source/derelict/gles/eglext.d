@@ -591,7 +591,7 @@ enum : uint {
 }
 extern( System ) nothrow {
     alias EGLBoolean function( EGLDeviceEXT, EGLint, EGLAttrib* ) da_eglQueryDeviceAttribEXT;
-    alias const char* function( EGLDeviceEXT, EGLint ) da_eglQueryDeviceStringEXT;
+    alias const( char )* function( EGLDeviceEXT, EGLint ) da_eglQueryDeviceStringEXT;
     alias EGLBoolean function( EGLint, EGLDeviceEXT*, EGLint* ) da_eglQueryDevicesEXT;
     alias EGLBoolean function( EGLDisplay, EGLint, EGLAttrib* ) da_eglQueryDisplayAttribEXT;
 }
