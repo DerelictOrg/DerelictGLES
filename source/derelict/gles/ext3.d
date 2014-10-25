@@ -25,36 +25,7 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 
 */
-module derelict.gles.types2;
+module derelict.gles.ext3;
 
-struct __GLsync;
-
-alias GLbyte = byte;
-alias GLclampf = float;
-alias GLfixed = int;
-alias GLshort = short;
-alias GLushort = ushort;
-alias GLvoid = void;
-alias GLsync = __GLsync*;
-alias GLint64 = long;
-alias GLuint64 = ulong;
-alias GLenum = uint;
-alias GLuint = uint;
-alias GLchar = char;
-alias GLfloat = float;
-alias GLsizeiptr = ptrdiff_t;
-alias GLintptr = ptrdiff_t;
-alias GLbitfield = uint;
-alias GLint = int;
-alias GLboolean = ubyte;
-alias GLsizei = int;
-alias GLubyte = ubyte;
-
-// This is a Derelict type, not from OpenGLES
-enum GLESVersion {
-    None,
-    GLES20,
-    GLES30,
-    GLES31,
-    HighestSupported = GLES31,
+package void loadEXT3(  ) {
 }
