@@ -36,7 +36,6 @@ private {
 private __gshared bool _GL_KHR_blend_equation_advanced;
 bool GL_KHR_blend_equation_advanced() @property { return _GL_KHR_blend_equation_advanced; }
 enum : uint {
-    GL_BLEND_ADVANCED_COHERENT_KHR    = 0x9285,
     GL_MULTIPLY_KHR                   = 0x9294,
     GL_SCREEN_KHR                     = 0x9295,
     GL_OVERLAY_KHR                    = 0x9296,
@@ -67,6 +66,19 @@ private void load_GL_KHR_blend_equation_advanced() {
     } catch( Exception e ) {
         _GL_KHR_blend_equation_advanced = false;
     }
+}
+
+private __gshared bool _GL_KHR_blend_equation_advanced_coherent;
+bool GL_KHR_blend_equation_advanced_coherent() @property { return _GL_KHR_blend_equation_advanced_coherent; }
+enum : uint {
+    GL_BLEND_ADVANCED_COHERENT_KHR    = 0x9285,
+}
+
+private __gshared bool _GL_KHR_context_flush_control;
+bool GL_KHR_context_flush_control() @property { return _GL_KHR_context_flush_control; }
+enum : uint {
+    GL_CONTEXT_RELEASE_BEHAVIOR_KHR   = 0x82FB,
+    GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH_KHR = 0x82FC,
 }
 
 private __gshared bool _GL_KHR_debug;
@@ -160,6 +172,49 @@ private void load_GL_KHR_debug() {
     }
 }
 
+private __gshared bool _GL_KHR_robust_buffer_access_behavior;
+bool GL_KHR_robust_buffer_access_behavior() @property { return _GL_KHR_robust_buffer_access_behavior; }
+
+private __gshared bool _GL_KHR_robustness;
+bool GL_KHR_robustness() @property { return _GL_KHR_robustness; }
+enum : uint {
+    GL_CONTEXT_ROBUST_ACCESS_KHR      = 0x90F3,
+    GL_LOSE_CONTEXT_ON_RESET_KHR      = 0x8252,
+    GL_GUILTY_CONTEXT_RESET_KHR       = 0x8253,
+    GL_INNOCENT_CONTEXT_RESET_KHR     = 0x8254,
+    GL_UNKNOWN_CONTEXT_RESET_KHR      = 0x8255,
+    GL_RESET_NOTIFICATION_STRATEGY_KHR = 0x8256,
+    GL_NO_RESET_NOTIFICATION_KHR      = 0x8261,
+    GL_CONTEXT_LOST_KHR               = 0x0507,
+}
+extern( System ) nothrow {
+    alias da_glGetGraphicsResetStatusKHR = GLenum function(  );
+    alias da_glReadnPixelsKHR = void function( GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, GLsizei, void* );
+    alias da_glGetnUniformfvKHR = void function( GLuint, GLint, GLsizei, GLfloat* );
+    alias da_glGetnUniformivKHR = void function( GLuint, GLint, GLsizei, GLint* );
+    alias da_glGetnUniformuivKHR = void function( GLuint, GLint, GLsizei, GLuint* );
+}
+__gshared {
+    da_glGetGraphicsResetStatusKHR glGetGraphicsResetStatusKHR;
+    da_glReadnPixelsKHR glReadnPixelsKHR;
+    da_glGetnUniformfvKHR glGetnUniformfvKHR;
+    da_glGetnUniformivKHR glGetnUniformivKHR;
+    da_glGetnUniformuivKHR glGetnUniformuivKHR;
+}
+private void load_GL_KHR_robustness() {
+    try {
+        bindGLFunc( cast( void** )&glGetGraphicsResetStatusKHR, "glGetGraphicsResetStatusKHR" );
+        bindGLFunc( cast( void** )&glReadnPixelsKHR, "glReadnPixelsKHR" );
+        bindGLFunc( cast( void** )&glGetnUniformfvKHR, "glGetnUniformfvKHR" );
+        bindGLFunc( cast( void** )&glGetnUniformivKHR, "glGetnUniformivKHR" );
+        bindGLFunc( cast( void** )&glGetnUniformuivKHR, "glGetnUniformuivKHR" );
+
+        _GL_KHR_robustness = true;
+    } catch( Exception e ) {
+        _GL_KHR_robustness = false;
+    }
+}
+
 private __gshared bool _GL_KHR_texture_compression_astc_hdr;
 bool GL_KHR_texture_compression_astc_hdr() @property { return _GL_KHR_texture_compression_astc_hdr; }
 enum : uint {
@@ -226,6 +281,9 @@ enum : uint {
     GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES = 0x8D68,
     GL_SAMPLER_EXTERNAL_OES           = 0x8D66,
 }
+
+private __gshared bool _GL_OES_compressed_ETC1_RGB8_sub_texture;
+bool GL_OES_compressed_ETC1_RGB8_sub_texture() @property { return _GL_OES_compressed_ETC1_RGB8_sub_texture; }
 
 private __gshared bool _GL_OES_compressed_ETC1_RGB8_texture;
 bool GL_OES_compressed_ETC1_RGB8_texture() @property { return _GL_OES_compressed_ETC1_RGB8_texture; }
@@ -650,6 +708,9 @@ enum : uint {
     GL_Z400_BINARY_AMD                = 0x8740,
 }
 
+private __gshared bool _GL_ANDROID_extension_pack_es31a;
+bool GL_ANDROID_extension_pack_es31a() @property { return _GL_ANDROID_extension_pack_es31a; }
+
 private __gshared bool _GL_ANGLE_depth_texture;
 bool GL_ANGLE_depth_texture() @property { return _GL_ANGLE_depth_texture; }
 
@@ -662,7 +723,7 @@ enum : uint {
     GL_READ_FRAMEBUFFER_BINDING_ANGLE = 0x8CAA,
 }
 extern( System ) nothrow {
-    alias da_glBlitFramebufferANGLE = void function( GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield, GLenum );
+    alias da_glBlitFramebufferANGLE = void function( GLint, GLint, GLint, GLint, GLint, GLint, GLint, GLint, GLbitfield, GLenum );
 }
 __gshared {
     da_glBlitFramebufferANGLE glBlitFramebufferANGLE;
@@ -778,6 +839,23 @@ private void load_GL_ANGLE_translated_shader_source() {
         _GL_ANGLE_translated_shader_source = false;
     }
 }
+
+private __gshared bool _GL_APPLE_clip_distance;
+bool GL_APPLE_clip_distance() @property { return _GL_APPLE_clip_distance; }
+enum : uint {
+    GL_MAX_CLIP_DISTANCES_APPLE       = 0x0D32,
+    GL_CLIP_DISTANCE0_APPLE           = 0x3000,
+    GL_CLIP_DISTANCE1_APPLE           = 0x3001,
+    GL_CLIP_DISTANCE2_APPLE           = 0x3002,
+    GL_CLIP_DISTANCE3_APPLE           = 0x3003,
+    GL_CLIP_DISTANCE4_APPLE           = 0x3004,
+    GL_CLIP_DISTANCE5_APPLE           = 0x3005,
+    GL_CLIP_DISTANCE6_APPLE           = 0x3006,
+    GL_CLIP_DISTANCE7_APPLE           = 0x3007,
+}
+
+private __gshared bool _GL_APPLE_color_buffer_packed_float;
+bool GL_APPLE_color_buffer_packed_float() @property { return _GL_APPLE_color_buffer_packed_float; }
 
 private __gshared bool _GL_APPLE_copy_texture_levels;
 bool GL_APPLE_copy_texture_levels() @property { return _GL_APPLE_copy_texture_levels; }
@@ -903,6 +981,15 @@ enum : uint {
     GL_TEXTURE_MAX_LEVEL_APPLE        = 0x813D,
 }
 
+private __gshared bool _GL_APPLE_texture_packed_float;
+bool GL_APPLE_texture_packed_float() @property { return _GL_APPLE_texture_packed_float; }
+enum : uint {
+    GL_UNSIGNED_INT_10F_11F_11F_REV_APPLE = 0x8C3B,
+    GL_UNSIGNED_INT_5_9_9_9_REV_APPLE = 0x8C3E,
+    GL_R11F_G11F_B10F_APPLE           = 0x8C3A,
+    GL_RGB9_E5_APPLE                  = 0x8C3D,
+}
+
 private __gshared bool _GL_ARM_mali_program_binary;
 bool GL_ARM_mali_program_binary() @property { return _GL_ARM_mali_program_binary; }
 enum : uint {
@@ -928,6 +1015,14 @@ enum : uint {
 private __gshared bool _GL_ARM_shader_framebuffer_fetch_depth_stencil;
 bool GL_ARM_shader_framebuffer_fetch_depth_stencil() @property { return _GL_ARM_shader_framebuffer_fetch_depth_stencil; }
 
+private __gshared bool _GL_DMP_program_binary;
+bool GL_DMP_program_binary() @property { return _GL_DMP_program_binary; }
+enum : uint {
+    GL_SMAPHS30_PROGRAM_BINARY_DMP    = 0x9251,
+    GL_SMAPHS_PROGRAM_BINARY_DMP      = 0x9252,
+    GL_DMP_PROGRAM_BINARY_DMP         = 0x9253,
+}
+
 private __gshared bool _GL_DMP_shader_binary;
 bool GL_DMP_shader_binary() @property { return _GL_DMP_shader_binary; }
 enum : uint {
@@ -950,6 +1045,24 @@ enum : uint {
     GL_R16F_EXT                       = 0x822D,
     GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT = 0x8211,
     GL_UNSIGNED_NORMALIZED_EXT        = 0x8C17,
+}
+
+private __gshared bool _GL_EXT_copy_image;
+bool GL_EXT_copy_image() @property { return _GL_EXT_copy_image; }
+extern( System ) nothrow {
+    alias da_glCopyImageSubDataEXT = void function( GLuint, GLenum, GLint, GLint, GLint, GLint, GLuint, GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei );
+}
+__gshared {
+    da_glCopyImageSubDataEXT glCopyImageSubDataEXT;
+}
+private void load_GL_EXT_copy_image() {
+    try {
+        bindGLFunc( cast( void** )&glCopyImageSubDataEXT, "glCopyImageSubDataEXT" );
+
+        _GL_EXT_copy_image = true;
+    } catch( Exception e ) {
+        _GL_EXT_copy_image = false;
+    }
 }
 
 private __gshared bool _GL_EXT_debug_label;
@@ -1140,6 +1253,49 @@ private void load_GL_EXT_draw_buffers() {
     }
 }
 
+private __gshared bool _GL_EXT_draw_buffers_indexed;
+bool GL_EXT_draw_buffers_indexed() @property { return _GL_EXT_draw_buffers_indexed; }
+enum : uint {
+    GL_MIN                            = 0x8007,
+    GL_MAX                            = 0x8008,
+}
+extern( System ) nothrow {
+    alias da_glEnableiEXT = void function( GLenum, GLuint );
+    alias da_glDisableiEXT = void function( GLenum, GLuint );
+    alias da_glBlendEquationiEXT = void function( GLuint, GLenum );
+    alias da_glBlendEquationSeparateiEXT = void function( GLuint, GLenum, GLenum );
+    alias da_glBlendFunciEXT = void function( GLuint, GLenum, GLenum );
+    alias da_glBlendFuncSeparateiEXT = void function( GLuint, GLenum, GLenum, GLenum, GLenum );
+    alias da_glColorMaskiEXT = void function( GLuint, GLboolean, GLboolean, GLboolean, GLboolean );
+    alias da_glIsEnablediEXT = GLboolean function( GLenum, GLuint );
+}
+__gshared {
+    da_glEnableiEXT glEnableiEXT;
+    da_glDisableiEXT glDisableiEXT;
+    da_glBlendEquationiEXT glBlendEquationiEXT;
+    da_glBlendEquationSeparateiEXT glBlendEquationSeparateiEXT;
+    da_glBlendFunciEXT glBlendFunciEXT;
+    da_glBlendFuncSeparateiEXT glBlendFuncSeparateiEXT;
+    da_glColorMaskiEXT glColorMaskiEXT;
+    da_glIsEnablediEXT glIsEnablediEXT;
+}
+private void load_GL_EXT_draw_buffers_indexed() {
+    try {
+        bindGLFunc( cast( void** )&glEnableiEXT, "glEnableiEXT" );
+        bindGLFunc( cast( void** )&glDisableiEXT, "glDisableiEXT" );
+        bindGLFunc( cast( void** )&glBlendEquationiEXT, "glBlendEquationiEXT" );
+        bindGLFunc( cast( void** )&glBlendEquationSeparateiEXT, "glBlendEquationSeparateiEXT" );
+        bindGLFunc( cast( void** )&glBlendFunciEXT, "glBlendFunciEXT" );
+        bindGLFunc( cast( void** )&glBlendFuncSeparateiEXT, "glBlendFuncSeparateiEXT" );
+        bindGLFunc( cast( void** )&glColorMaskiEXT, "glColorMaskiEXT" );
+        bindGLFunc( cast( void** )&glIsEnablediEXT, "glIsEnablediEXT" );
+
+        _GL_EXT_draw_buffers_indexed = true;
+    } catch( Exception e ) {
+        _GL_EXT_draw_buffers_indexed = false;
+    }
+}
+
 private __gshared bool _GL_EXT_draw_instanced;
 bool GL_EXT_draw_instanced() @property { return _GL_EXT_draw_instanced; }
 extern( System ) nothrow {
@@ -1160,6 +1316,65 @@ private void load_GL_EXT_draw_instanced() {
         _GL_EXT_draw_instanced = false;
     }
 }
+
+private __gshared bool _GL_EXT_geometry_point_size;
+bool GL_EXT_geometry_point_size() @property { return _GL_EXT_geometry_point_size; }
+
+private __gshared bool _GL_EXT_geometry_shader;
+bool GL_EXT_geometry_shader() @property { return _GL_EXT_geometry_shader; }
+enum : uint {
+    GL_GEOMETRY_SHADER_EXT            = 0x8DD9,
+    GL_GEOMETRY_SHADER_BIT_EXT        = 0x00000004,
+    GL_GEOMETRY_LINKED_VERTICES_OUT_EXT = 0x8916,
+    GL_GEOMETRY_LINKED_INPUT_TYPE_EXT = 0x8917,
+    GL_GEOMETRY_LINKED_OUTPUT_TYPE_EXT = 0x8918,
+    GL_GEOMETRY_SHADER_INVOCATIONS_EXT = 0x887F,
+    GL_LAYER_PROVOKING_VERTEX_EXT     = 0x825E,
+    GL_LINES_ADJACENCY_EXT            = 0x000A,
+    GL_LINE_STRIP_ADJACENCY_EXT       = 0x000B,
+    GL_TRIANGLES_ADJACENCY_EXT        = 0x000C,
+    GL_TRIANGLE_STRIP_ADJACENCY_EXT   = 0x000D,
+    GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_EXT = 0x8DDF,
+    GL_MAX_GEOMETRY_UNIFORM_BLOCKS_EXT = 0x8A2C,
+    GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS_EXT = 0x8A32,
+    GL_MAX_GEOMETRY_INPUT_COMPONENTS_EXT = 0x9123,
+    GL_MAX_GEOMETRY_OUTPUT_COMPONENTS_EXT = 0x9124,
+    GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT = 0x8DE0,
+    GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_EXT = 0x8DE1,
+    GL_MAX_GEOMETRY_SHADER_INVOCATIONS_EXT = 0x8E5A,
+    GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_EXT = 0x8C29,
+    GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS_EXT = 0x92CF,
+    GL_MAX_GEOMETRY_ATOMIC_COUNTERS_EXT = 0x92D5,
+    GL_MAX_GEOMETRY_IMAGE_UNIFORMS_EXT = 0x90CD,
+    GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS_EXT = 0x90D7,
+    GL_FIRST_VERTEX_CONVENTION_EXT    = 0x8E4D,
+    GL_LAST_VERTEX_CONVENTION_EXT     = 0x8E4E,
+    GL_UNDEFINED_VERTEX_EXT           = 0x8260,
+    GL_PRIMITIVES_GENERATED_EXT       = 0x8C87,
+    GL_FRAMEBUFFER_DEFAULT_LAYERS_EXT = 0x9312,
+    GL_MAX_FRAMEBUFFER_LAYERS_EXT     = 0x9317,
+    GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT = 0x8DA8,
+    GL_FRAMEBUFFER_ATTACHMENT_LAYERED_EXT = 0x8DA7,
+    GL_REFERENCED_BY_GEOMETRY_SHADER_EXT = 0x9309,
+}
+extern( System ) nothrow {
+    alias da_glFramebufferTextureEXT = void function( GLenum, GLenum, GLuint, GLint );
+}
+__gshared {
+    da_glFramebufferTextureEXT glFramebufferTextureEXT;
+}
+private void load_GL_EXT_geometry_shader() {
+    try {
+        bindGLFunc( cast( void** )&glFramebufferTextureEXT, "glFramebufferTextureEXT" );
+
+        _GL_EXT_geometry_shader = true;
+    } catch( Exception e ) {
+        _GL_EXT_geometry_shader = false;
+    }
+}
+
+private __gshared bool _GL_EXT_gpu_shader5;
+bool GL_EXT_gpu_shader5() @property { return _GL_EXT_gpu_shader5; }
 
 private __gshared bool _GL_EXT_instanced_arrays;
 bool GL_EXT_instanced_arrays() @property { return _GL_EXT_instanced_arrays; }
@@ -1297,6 +1512,27 @@ enum : uint {
     GL_ANY_SAMPLES_PASSED_CONSERVATIVE_EXT = 0x8D6A,
 }
 
+private __gshared bool _GL_EXT_primitive_bounding_box;
+bool GL_EXT_primitive_bounding_box() @property { return _GL_EXT_primitive_bounding_box; }
+enum : uint {
+    GL_PRIMITIVE_BOUNDING_BOX_EXT     = 0x92BE,
+}
+extern( System ) nothrow {
+    alias da_glPrimitiveBoundingBoxEXT = void function( GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat, GLfloat );
+}
+__gshared {
+    da_glPrimitiveBoundingBoxEXT glPrimitiveBoundingBoxEXT;
+}
+private void load_GL_EXT_primitive_bounding_box() {
+    try {
+        bindGLFunc( cast( void** )&glPrimitiveBoundingBoxEXT, "glPrimitiveBoundingBoxEXT" );
+
+        _GL_EXT_primitive_bounding_box = true;
+    } catch( Exception e ) {
+        _GL_EXT_primitive_bounding_box = false;
+    }
+}
+
 private __gshared bool _GL_EXT_pvrtc_sRGB;
 bool GL_EXT_pvrtc_sRGB() @property { return _GL_EXT_pvrtc_sRGB; }
 enum : uint {
@@ -1304,6 +1540,8 @@ enum : uint {
     GL_COMPRESSED_SRGB_PVRTC_4BPPV1_EXT = 0x8A55,
     GL_COMPRESSED_SRGB_ALPHA_PVRTC_2BPPV1_EXT = 0x8A56,
     GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV1_EXT = 0x8A57,
+    GL_COMPRESSED_SRGB_ALPHA_PVRTC_2BPPV2_IMG = 0x93F0,
+    GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV2_IMG = 0x93F1,
 }
 
 private __gshared bool _GL_EXT_read_format_bgra;
@@ -1525,8 +1763,14 @@ enum : uint {
     GL_FRAGMENT_SHADER_DISCARDS_SAMPLES_EXT = 0x8A52,
 }
 
+private __gshared bool _GL_EXT_shader_implicit_conversions;
+bool GL_EXT_shader_implicit_conversions() @property { return _GL_EXT_shader_implicit_conversions; }
+
 private __gshared bool _GL_EXT_shader_integer_mix;
 bool GL_EXT_shader_integer_mix() @property { return _GL_EXT_shader_integer_mix; }
+
+private __gshared bool _GL_EXT_shader_io_blocks;
+bool GL_EXT_shader_io_blocks() @property { return _GL_EXT_shader_io_blocks; }
 
 private __gshared bool _GL_EXT_shader_pixel_local_storage;
 bool GL_EXT_shader_pixel_local_storage() @property { return _GL_EXT_shader_pixel_local_storage; }
@@ -1548,6 +1792,152 @@ enum : uint {
     GL_SAMPLER_2D_SHADOW_EXT          = 0x8B62,
 }
 
+private __gshared bool _GL_EXT_tessellation_point_size;
+bool GL_EXT_tessellation_point_size() @property { return _GL_EXT_tessellation_point_size; }
+
+private __gshared bool _GL_EXT_tessellation_shader;
+bool GL_EXT_tessellation_shader() @property { return _GL_EXT_tessellation_shader; }
+enum : uint {
+    GL_PATCHES_EXT                    = 0x000E,
+    GL_PATCH_VERTICES_EXT             = 0x8E72,
+    GL_TESS_CONTROL_OUTPUT_VERTICES_EXT = 0x8E75,
+    GL_TESS_GEN_MODE_EXT              = 0x8E76,
+    GL_TESS_GEN_SPACING_EXT           = 0x8E77,
+    GL_TESS_GEN_VERTEX_ORDER_EXT      = 0x8E78,
+    GL_TESS_GEN_POINT_MODE_EXT        = 0x8E79,
+    GL_ISOLINES_EXT                   = 0x8E7A,
+    GL_QUADS_EXT                      = 0x0007,
+    GL_FRACTIONAL_ODD_EXT             = 0x8E7B,
+    GL_FRACTIONAL_EVEN_EXT            = 0x8E7C,
+    GL_MAX_PATCH_VERTICES_EXT         = 0x8E7D,
+    GL_MAX_TESS_GEN_LEVEL_EXT         = 0x8E7E,
+    GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS_EXT = 0x8E7F,
+    GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS_EXT = 0x8E80,
+    GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS_EXT = 0x8E81,
+    GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS_EXT = 0x8E82,
+    GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS_EXT = 0x8E83,
+    GL_MAX_TESS_PATCH_COMPONENTS_EXT  = 0x8E84,
+    GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS_EXT = 0x8E85,
+    GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS_EXT = 0x8E86,
+    GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS_EXT = 0x8E89,
+    GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS_EXT = 0x8E8A,
+    GL_MAX_TESS_CONTROL_INPUT_COMPONENTS_EXT = 0x886C,
+    GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS_EXT = 0x886D,
+    GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS_EXT = 0x8E1E,
+    GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS_EXT = 0x8E1F,
+    GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS_EXT = 0x92CD,
+    GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS_EXT = 0x92CE,
+    GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS_EXT = 0x92D3,
+    GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS_EXT = 0x92D4,
+    GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS_EXT = 0x90CB,
+    GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS_EXT = 0x90CC,
+    GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS_EXT = 0x90D8,
+    GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS_EXT = 0x90D9,
+    GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED = 0x8221,
+    GL_IS_PER_PATCH_EXT               = 0x92E7,
+    GL_REFERENCED_BY_TESS_CONTROL_SHADER_EXT = 0x9307,
+    GL_REFERENCED_BY_TESS_EVALUATION_SHADER_EXT = 0x9308,
+    GL_TESS_CONTROL_SHADER_EXT        = 0x8E88,
+    GL_TESS_EVALUATION_SHADER_EXT     = 0x8E87,
+    GL_TESS_CONTROL_SHADER_BIT_EXT    = 0x00000008,
+    GL_TESS_EVALUATION_SHADER_BIT_EXT = 0x00000010,
+}
+extern( System ) nothrow {
+    alias da_glPatchParameteriEXT = void function( GLenum, GLint );
+}
+__gshared {
+    da_glPatchParameteriEXT glPatchParameteriEXT;
+}
+private void load_GL_EXT_tessellation_shader() {
+    try {
+        bindGLFunc( cast( void** )&glPatchParameteriEXT, "glPatchParameteriEXT" );
+
+        _GL_EXT_tessellation_shader = true;
+    } catch( Exception e ) {
+        _GL_EXT_tessellation_shader = false;
+    }
+}
+
+private __gshared bool _GL_EXT_texture_border_clamp;
+bool GL_EXT_texture_border_clamp() @property { return _GL_EXT_texture_border_clamp; }
+enum : uint {
+    GL_TEXTURE_BORDER_COLOR_EXT       = 0x1004,
+    GL_CLAMP_TO_BORDER_EXT            = 0x812D,
+}
+extern( System ) nothrow {
+    alias da_glTexParameterIivEXT = void function( GLenum, GLenum, const( GLint )* );
+    alias da_glTexParameterIuivEXT = void function( GLenum, GLenum, const( GLuint )* );
+    alias da_glGetTexParameterIivEXT = void function( GLenum, GLenum, GLint* );
+    alias da_glGetTexParameterIuivEXT = void function( GLenum, GLenum, GLuint* );
+    alias da_glSamplerParameterIivEXT = void function( GLuint, GLenum, const( GLint )* );
+    alias da_glSamplerParameterIuivEXT = void function( GLuint, GLenum, const( GLuint )* );
+    alias da_glGetSamplerParameterIivEXT = void function( GLuint, GLenum, GLint* );
+    alias da_glGetSamplerParameterIuivEXT = void function( GLuint, GLenum, GLuint* );
+}
+__gshared {
+    da_glTexParameterIivEXT glTexParameterIivEXT;
+    da_glTexParameterIuivEXT glTexParameterIuivEXT;
+    da_glGetTexParameterIivEXT glGetTexParameterIivEXT;
+    da_glGetTexParameterIuivEXT glGetTexParameterIuivEXT;
+    da_glSamplerParameterIivEXT glSamplerParameterIivEXT;
+    da_glSamplerParameterIuivEXT glSamplerParameterIuivEXT;
+    da_glGetSamplerParameterIivEXT glGetSamplerParameterIivEXT;
+    da_glGetSamplerParameterIuivEXT glGetSamplerParameterIuivEXT;
+}
+private void load_GL_EXT_texture_border_clamp() {
+    try {
+        bindGLFunc( cast( void** )&glTexParameterIivEXT, "glTexParameterIivEXT" );
+        bindGLFunc( cast( void** )&glTexParameterIuivEXT, "glTexParameterIuivEXT" );
+        bindGLFunc( cast( void** )&glGetTexParameterIivEXT, "glGetTexParameterIivEXT" );
+        bindGLFunc( cast( void** )&glGetTexParameterIuivEXT, "glGetTexParameterIuivEXT" );
+        bindGLFunc( cast( void** )&glSamplerParameterIivEXT, "glSamplerParameterIivEXT" );
+        bindGLFunc( cast( void** )&glSamplerParameterIuivEXT, "glSamplerParameterIuivEXT" );
+        bindGLFunc( cast( void** )&glGetSamplerParameterIivEXT, "glGetSamplerParameterIivEXT" );
+        bindGLFunc( cast( void** )&glGetSamplerParameterIuivEXT, "glGetSamplerParameterIuivEXT" );
+
+        _GL_EXT_texture_border_clamp = true;
+    } catch( Exception e ) {
+        _GL_EXT_texture_border_clamp = false;
+    }
+}
+
+private __gshared bool _GL_EXT_texture_buffer;
+bool GL_EXT_texture_buffer() @property { return _GL_EXT_texture_buffer; }
+enum : uint {
+    GL_TEXTURE_BUFFER_EXT             = 0x8C2A,
+    GL_TEXTURE_BUFFER_BINDING_EXT     = 0x8C2A,
+    GL_MAX_TEXTURE_BUFFER_SIZE_EXT    = 0x8C2B,
+    GL_TEXTURE_BINDING_BUFFER_EXT     = 0x8C2C,
+    GL_TEXTURE_BUFFER_DATA_STORE_BINDING_EXT = 0x8C2D,
+    GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT_EXT = 0x919F,
+    GL_SAMPLER_BUFFER_EXT             = 0x8DC2,
+    GL_INT_SAMPLER_BUFFER_EXT         = 0x8DD0,
+    GL_UNSIGNED_INT_SAMPLER_BUFFER_EXT = 0x8DD8,
+    GL_IMAGE_BUFFER_EXT               = 0x9051,
+    GL_INT_IMAGE_BUFFER_EXT           = 0x905C,
+    GL_UNSIGNED_INT_IMAGE_BUFFER_EXT  = 0x9067,
+    GL_TEXTURE_BUFFER_OFFSET_EXT      = 0x919D,
+    GL_TEXTURE_BUFFER_SIZE_EXT        = 0x919E,
+}
+extern( System ) nothrow {
+    alias da_glTexBufferEXT = void function( GLenum, GLenum, GLuint );
+    alias da_glTexBufferRangeEXT = void function( GLenum, GLenum, GLuint, GLintptr, GLsizeiptr );
+}
+__gshared {
+    da_glTexBufferEXT glTexBufferEXT;
+    da_glTexBufferRangeEXT glTexBufferRangeEXT;
+}
+private void load_GL_EXT_texture_buffer() {
+    try {
+        bindGLFunc( cast( void** )&glTexBufferEXT, "glTexBufferEXT" );
+        bindGLFunc( cast( void** )&glTexBufferRangeEXT, "glTexBufferRangeEXT" );
+
+        _GL_EXT_texture_buffer = true;
+    } catch( Exception e ) {
+        _GL_EXT_texture_buffer = false;
+    }
+}
+
 private __gshared bool _GL_EXT_texture_compression_dxt1;
 bool GL_EXT_texture_compression_dxt1() @property { return _GL_EXT_texture_compression_dxt1; }
 enum : uint {
@@ -1560,6 +1950,20 @@ bool GL_EXT_texture_compression_s3tc() @property { return _GL_EXT_texture_compre
 enum : uint {
     GL_COMPRESSED_RGBA_S3TC_DXT3_EXT  = 0x83F2,
     GL_COMPRESSED_RGBA_S3TC_DXT5_EXT  = 0x83F3,
+}
+
+private __gshared bool _GL_EXT_texture_cube_map_array;
+bool GL_EXT_texture_cube_map_array() @property { return _GL_EXT_texture_cube_map_array; }
+enum : uint {
+    GL_TEXTURE_CUBE_MAP_ARRAY_EXT     = 0x9009,
+    GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_EXT = 0x900A,
+    GL_SAMPLER_CUBE_MAP_ARRAY_EXT     = 0x900C,
+    GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_EXT = 0x900D,
+    GL_INT_SAMPLER_CUBE_MAP_ARRAY_EXT = 0x900E,
+    GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_EXT = 0x900F,
+    GL_IMAGE_CUBE_MAP_ARRAY_EXT       = 0x9054,
+    GL_INT_IMAGE_CUBE_MAP_ARRAY_EXT   = 0x905F,
+    GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT = 0x906A,
 }
 
 private __gshared bool _GL_EXT_texture_filter_anisotropic;
@@ -1642,6 +2046,31 @@ private __gshared bool _GL_EXT_texture_type_2_10_10_10_REV;
 bool GL_EXT_texture_type_2_10_10_10_REV() @property { return _GL_EXT_texture_type_2_10_10_10_REV; }
 enum : uint {
     GL_UNSIGNED_INT_2_10_10_10_REV_EXT = 0x8368,
+}
+
+private __gshared bool _GL_EXT_texture_view;
+bool GL_EXT_texture_view() @property { return _GL_EXT_texture_view; }
+enum : uint {
+    GL_TEXTURE_VIEW_MIN_LEVEL_EXT     = 0x82DB,
+    GL_TEXTURE_VIEW_NUM_LEVELS_EXT    = 0x82DC,
+    GL_TEXTURE_VIEW_MIN_LAYER_EXT     = 0x82DD,
+    GL_TEXTURE_VIEW_NUM_LAYERS_EXT    = 0x82DE,
+    GL_TEXTURE_IMMUTABLE_LEVELS       = 0x82DF,
+}
+extern( System ) nothrow {
+    alias da_glTextureViewEXT = void function( GLuint, GLenum, GLuint, GLenum, GLuint, GLuint, GLuint, GLuint );
+}
+__gshared {
+    da_glTextureViewEXT glTextureViewEXT;
+}
+private void load_GL_EXT_texture_view() {
+    try {
+        bindGLFunc( cast( void** )&glTextureViewEXT, "glTextureViewEXT" );
+
+        _GL_EXT_texture_view = true;
+    } catch( Exception e ) {
+        _GL_EXT_texture_view = false;
+    }
 }
 
 private __gshared bool _GL_EXT_unpack_subimage;
@@ -2120,6 +2549,33 @@ private void load_GL_NV_instanced_arrays() {
     }
 }
 
+
+private __gshared bool _GL_NV_internalformat_sample_query;
+bool GL_NV_internalformat_sample_query() @property { return _GL_NV_internalformat_sample_query; }
+enum : uint {
+    GL_TEXTURE_2D_MULTISAMPLE         = 0x9100,
+    GL_TEXTURE_2D_MULTISAMPLE_ARRAY   = 0x9102,
+    GL_MULTISAMPLES_NV                = 0x9371,
+    GL_SUPERSAMPLE_SCALE_X_NV         = 0x9372,
+    GL_SUPERSAMPLE_SCALE_Y_NV         = 0x9373,
+    GL_CONFORMANT_NV                  = 0x9374,
+}
+extern( System ) nothrow {
+    alias da_glGetInternalformatSampleivNV = void function( GLenum, GLenum, GLsizei, GLenum, GLsizei, GLint* );
+}
+__gshared {
+    da_glGetInternalformatSampleivNV glGetInternalformatSampleivNV;
+}
+private void load_GL_NV_internalformat_sample_query() {
+    try {
+        bindGLFunc( cast( void** )&glGetInternalformatSampleivNV, "glGetInternalformatSampleivNV" );
+
+        _GL_NV_internalformat_sample_query = true;
+    } catch( Exception e ) {
+        _GL_NV_internalformat_sample_query = false;
+    }
+}
+
 private __gshared bool _GL_NV_non_square_matrices;
 bool GL_NV_non_square_matrices() @property { return _GL_NV_non_square_matrices; }
 enum : uint {
@@ -2435,14 +2891,20 @@ enum : uint {
 
 package void loadEXT2(  ) {
     _GL_KHR_blend_equation_advanced = isExtSupported( "GL_KHR_blend_equation_advanced" );
+    _GL_KHR_blend_equation_advanced_coherent = isExtSupported( "GL_KHR_blend_equation_advanced_coherent" );
+    _GL_KHR_context_flush_control = isExtSupported( "GL_KHR_context_flush_control" );
     if( _GL_KHR_blend_equation_advanced ) load_GL_KHR_blend_equation_advanced();
     _GL_KHR_debug = isExtSupported( "GL_KHR_debug" );
     if( _GL_KHR_debug ) load_GL_KHR_debug();
+    _GL_KHR_robust_buffer_access_behavior = isExtSupported( "GL_KHR_robust_buffer_access_behavior" );
+    _GL_KHR_robustness = isExtSupported( "GL_KHR_robustness" );
+    if( _GL_KHR_robustness ) load_GL_KHR_robustness();
     _GL_KHR_texture_compression_astc_hdr = isExtSupported( "GL_KHR_texture_compression_astc_hdr" );
     _GL_KHR_texture_compression_astc_ldr = isExtSupported( "GL_KHR_texture_compression_astc_ldr" );
     _GL_OES_EGL_image = isExtSupported( "GL_OES_EGL_image" );
     if( _GL_OES_EGL_image ) load_GL_OES_EGL_image();
     _GL_OES_EGL_image_external = isExtSupported( "GL_OES_EGL_image_external" );
+    _GL_OES_compressed_ETC1_RGB8_sub_texture = isExtSupported( "GL_OES_compressed_ETC1_RGB8_sub_texture" );
     _GL_OES_compressed_ETC1_RGB8_texture = isExtSupported( "GL_OES_compressed_ETC1_RGB8_texture" );
     _GL_OES_compressed_paletted_texture = isExtSupported( "GL_OES_compressed_paletted_texture" );
     _GL_OES_depth24 = isExtSupported( "GL_OES_depth24" );
@@ -2487,6 +2949,7 @@ package void loadEXT2(  ) {
     _GL_AMD_performance_monitor = isExtSupported( "GL_AMD_performance_monitor" );
     if( _GL_AMD_performance_monitor ) load_GL_AMD_performance_monitor();
     _GL_AMD_program_binary_Z400 = isExtSupported( "GL_AMD_program_binary_Z400" );
+    _GL_ANDROID_extension_pack_es31a = isExtSupported( "GL_ANDROID_extension_pack_es31a" );
     _GL_ANGLE_depth_texture = isExtSupported( "GL_ANGLE_depth_texture" );
     _GL_ANGLE_framebuffer_blit = isExtSupported( "GL_ANGLE_framebuffer_blit" );
     if( _GL_ANGLE_framebuffer_blit ) load_GL_ANGLE_framebuffer_blit();
@@ -2501,6 +2964,8 @@ package void loadEXT2(  ) {
     _GL_ANGLE_texture_usage = isExtSupported( "GL_ANGLE_texture_usage" );
     _GL_ANGLE_translated_shader_source = isExtSupported( "GL_ANGLE_translated_shader_source" );
     if( _GL_ANGLE_translated_shader_source ) load_GL_ANGLE_translated_shader_source();
+    _GL_APPLE_clip_distance = isExtSupported( "GL_APPLE_clip_distance" );
+    _GL_APPLE_color_buffer_packed_float = isExtSupported( "GL_APPLE_color_buffer_packed_float" );
     _GL_APPLE_copy_texture_levels = isExtSupported( "GL_APPLE_copy_texture_levels" );
     if( _GL_APPLE_copy_texture_levels ) load_GL_APPLE_copy_texture_levels();
     _GL_APPLE_framebuffer_multisample = isExtSupported( "GL_APPLE_framebuffer_multisample" );
@@ -2510,14 +2975,18 @@ package void loadEXT2(  ) {
     if( _GL_APPLE_sync ) load_GL_APPLE_sync();
     _GL_APPLE_texture_format_BGRA8888 = isExtSupported( "GL_APPLE_texture_format_BGRA8888" );
     _GL_APPLE_texture_max_level = isExtSupported( "GL_APPLE_texture_max_level" );
+    _GL_APPLE_texture_packed_float = isExtSupported( "GL_APPLE_texture_packed_float" );
     _GL_ARM_mali_program_binary = isExtSupported( "GL_ARM_mali_program_binary" );
     _GL_ARM_mali_shader_binary = isExtSupported( "GL_ARM_mali_shader_binary" );
     _GL_ARM_rgba8 = isExtSupported( "GL_ARM_rgba8" );
     _GL_ARM_shader_framebuffer_fetch = isExtSupported( "GL_ARM_shader_framebuffer_fetch" );
     _GL_ARM_shader_framebuffer_fetch_depth_stencil = isExtSupported( "GL_ARM_shader_framebuffer_fetch_depth_stencil" );
+    _GL_DMP_program_binary = isExtSupported( "GL_DMP_program_binary" );
     _GL_DMP_shader_binary = isExtSupported( "GL_DMP_shader_binary" );
     _GL_EXT_blend_minmax = isExtSupported( "GL_EXT_blend_minmax" );
     _GL_EXT_color_buffer_half_float = isExtSupported( "GL_EXT_color_buffer_half_float" );
+    _GL_EXT_copy_image = isExtSupported( "GL_EXT_copy_image" );
+    if( _GL_EXT_copy_image ) load_GL_EXT_copy_image();
     _GL_EXT_debug_label = isExtSupported( "GL_EXT_debug_label" );
     if( _GL_EXT_debug_label ) load_GL_EXT_debug_label();
     _GL_EXT_debug_marker = isExtSupported( "GL_EXT_debug_marker" );
@@ -2528,8 +2997,14 @@ package void loadEXT2(  ) {
     if( _GL_EXT_disjoint_timer_query ) load_GL_EXT_disjoint_timer_query();
     _GL_EXT_draw_buffers = isExtSupported( "GL_EXT_draw_buffers" );
     if( _GL_EXT_draw_buffers ) load_GL_EXT_draw_buffers();
+    _GL_EXT_draw_buffers_indexed = isExtSupported( "GL_EXT_draw_buffers_indexed" );
+    if( _GL_EXT_draw_buffers_indexed ) load_GL_EXT_draw_buffers_indexed();
     _GL_EXT_draw_instanced = isExtSupported( "GL_EXT_draw_instanced" );
     if( _GL_EXT_draw_instanced ) load_GL_EXT_draw_instanced();
+    _GL_EXT_geometry_point_size = isExtSupported( "GL_EXT_geometry_point_size" );
+    _GL_EXT_geometry_shader = isExtSupported( "GL_EXT_geometry_shader" );
+    if( _GL_EXT_geometry_shader ) load_GL_EXT_geometry_shader();
+    _GL_EXT_gpu_shader5 = isExtSupported( "GL_EXT_gpu_shader5" );
     _GL_EXT_instanced_arrays = isExtSupported( "GL_EXT_instanced_arrays" );
     if( _GL_EXT_instanced_arrays ) load_GL_EXT_instanced_arrays();
     _GL_EXT_map_buffer_range = isExtSupported( "GL_EXT_map_buffer_range" );
@@ -2541,6 +3016,8 @@ package void loadEXT2(  ) {
     _GL_EXT_multiview_draw_buffers = isExtSupported( "GL_EXT_multiview_draw_buffers" );
     if( _GL_EXT_multiview_draw_buffers ) load_GL_EXT_multiview_draw_buffers();
     _GL_EXT_occlusion_query_boolean = isExtSupported( "GL_EXT_occlusion_query_boolean" );
+    _GL_EXT_primitive_bounding_box = isExtSupported( "GL_EXT_primitive_bounding_box" );
+    if( _GL_EXT_primitive_bounding_box ) load_GL_EXT_primitive_bounding_box();
     _GL_EXT_pvrtc_sRGB = isExtSupported( "GL_EXT_pvrtc_sRGB" );
     _GL_EXT_read_format_bgra = isExtSupported( "GL_EXT_read_format_bgra" );
     _GL_EXT_robustness = isExtSupported( "GL_EXT_robustness" );
@@ -2550,12 +3027,22 @@ package void loadEXT2(  ) {
     _GL_EXT_separate_shader_objects = isExtSupported( "GL_EXT_separate_shader_objects" );
     if( _GL_EXT_separate_shader_objects ) load_GL_EXT_separate_shader_objects();
     _GL_EXT_shader_framebuffer_fetch = isExtSupported( "GL_EXT_shader_framebuffer_fetch" );
+    _GL_EXT_shader_implicit_conversions = isExtSupported( "GL_EXT_shader_implicit_conversions" );
     _GL_EXT_shader_integer_mix = isExtSupported( "GL_EXT_shader_integer_mix" );
+    _GL_EXT_shader_io_blocks = isExtSupported( "GL_EXT_shader_io_blocks" );
     _GL_EXT_shader_pixel_local_storage = isExtSupported( "GL_EXT_shader_pixel_local_storage" );
     _GL_EXT_shader_texture_lod = isExtSupported( "GL_EXT_shader_texture_lod" );
     _GL_EXT_shadow_samplers = isExtSupported( "GL_EXT_shadow_samplers" );
+    _GL_EXT_tessellation_point_size = isExtSupported( "GL_EXT_tessellation_point_size" );
+    _GL_EXT_tessellation_shader = isExtSupported( "GL_EXT_tessellation_shader" );
+    if( _GL_EXT_tessellation_shader ) load_GL_EXT_tessellation_shader();
+    _GL_EXT_texture_border_clamp = isExtSupported( "GL_EXT_texture_border_clamp" );
+    if( _GL_EXT_texture_border_clamp ) load_GL_EXT_texture_border_clamp();
+    _GL_EXT_texture_buffer = isExtSupported( "GL_EXT_texture_buffer" );
+    if( _GL_EXT_texture_buffer ) load_GL_EXT_texture_buffer();
     _GL_EXT_texture_compression_dxt1 = isExtSupported( "GL_EXT_texture_compression_dxt1" );
     _GL_EXT_texture_compression_s3tc = isExtSupported( "GL_EXT_texture_compression_s3tc" );
+    _GL_EXT_texture_cube_map_array = isExtSupported( "GL_EXT_texture_cube_map_array" );
     _GL_EXT_texture_filter_anisotropic = isExtSupported( "GL_EXT_texture_filter_anisotropic" );
     _GL_EXT_texture_format_BGRA8888 = isExtSupported( "GL_EXT_texture_format_BGRA8888" );
     _GL_EXT_texture_rg = isExtSupported( "GL_EXT_texture_rg" );
@@ -2563,6 +3050,8 @@ package void loadEXT2(  ) {
     _GL_EXT_texture_storage = isExtSupported( "GL_EXT_texture_storage" );
     if( _GL_EXT_texture_storage ) load_GL_EXT_texture_storage();
     _GL_EXT_texture_type_2_10_10_10_REV = isExtSupported( "GL_EXT_texture_type_2_10_10_10_REV" );
+    _GL_EXT_texture_view = isExtSupported( "GL_EXT_texture_view" );
+    if( _GL_EXT_texture_view ) load_GL_EXT_texture_view();
     _GL_EXT_unpack_subimage = isExtSupported( "GL_EXT_unpack_subimage" );
     _GL_FJ_shader_binary_GCCSO = isExtSupported( "GL_FJ_shader_binary_GCCSO" );
     _GL_IMG_multisampled_render_to_texture = isExtSupported( "GL_IMG_multisampled_render_to_texture" );
@@ -2597,6 +3086,8 @@ package void loadEXT2(  ) {
     _GL_NV_generate_mipmap_sRGB = isExtSupported( "GL_NV_generate_mipmap_sRGB" );
     _GL_NV_instanced_arrays = isExtSupported( "GL_NV_instanced_arrays" );
     if( _GL_NV_instanced_arrays ) load_GL_NV_instanced_arrays();
+    _GL_NV_internalformat_sample_query = isExtSupported( "GL_NV_internalformat_sample_query" );
+    if( _GL_NV_internalformat_sample_query ) load_GL_NV_internalformat_sample_query();
     _GL_NV_non_square_matrices = isExtSupported( "GL_NV_non_square_matrices" );
     if( _GL_NV_non_square_matrices ) load_GL_NV_non_square_matrices();
     _GL_NV_read_buffer = isExtSupported( "GL_NV_read_buffer" );
