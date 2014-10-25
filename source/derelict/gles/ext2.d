@@ -71,7 +71,7 @@ private void load_GL_KHR_blend_equation_advanced() {
 
 private __gshared bool _GL_KHR_debug;
 bool GL_KHR_debug() @property { return _GL_KHR_debug; }
-alias GLDEBUGPROCKHR = void function( GLenum, GLenum, GLuint, GLenum, GLsizei, const GLchar*, const void* );
+alias GLDEBUGPROCKHR = void function( GLenum, GLenum, GLuint, GLenum, GLsizei, const( GLchar )*, const( void )* );
 enum : uint {
     GL_SAMPLER                        = 0x82E6,
     GL_DEBUG_OUTPUT_SYNCHRONOUS_KHR   = 0x8242,
@@ -115,16 +115,16 @@ enum : uint {
     GL_STACK_UNDERFLOW_KHR            = 0x0504,
 }
 extern( System ) nothrow {
-    alias da_glDebugMessageControlKHR = void function( GLenum, GLenum, GLenum, GLsizei, const GLuint*, GLboolean );
-    alias da_glDebugMessageInsertKHR = void function( GLenum, GLenum, GLuint, GLenum, GLsizei, const GLchar* );
-    alias da_glDebugMessageCallbackKHR = void function( GLDEBUGPROCKHR, const void* );
+    alias da_glDebugMessageControlKHR = void function( GLenum, GLenum, GLenum, GLsizei, const( GLuint )*, GLboolean );
+    alias da_glDebugMessageInsertKHR = void function( GLenum, GLenum, GLuint, GLenum, GLsizei, const( GLchar )* );
+    alias da_glDebugMessageCallbackKHR = void function( GLDEBUGPROCKHR, const( void )* );
     alias da_glGetDebugMessageLogKHR = GLuint function ( GLuint, GLsizei, GLenum*, GLenum*, GLuint*, GLenum*, GLsizei*, GLchar* );
-    alias da_glPushDebugGroupKHR = void function( GLenum, GLuint, GLsizei, const GLchar* );
+    alias da_glPushDebugGroupKHR = void function( GLenum, GLuint, GLsizei, const( GLchar )* );
     alias da_glPopDebugGroupKHR = void function(  );
-    alias da_glObjectLabelKHR = void function( GLenum, GLuint, GLsizei, const GLchar* );
+    alias da_glObjectLabelKHR = void function( GLenum, GLuint, GLsizei, const( GLchar )* );
     alias da_glGetObjectLabelKHR = void function( GLenum, GLuint, GLsizei, GLsizei*, GLchar* );
-    alias da_glObjectPtrLabelKHR = void function( const void*, GLsizei, const GLchar* );
-    alias da_glGetObjectPtrLabelKHR = void function( const void*, GLsizei, GLsizei*, GLchar* );
+    alias da_glObjectPtrLabelKHR = void function( const( void )*, GLsizei, const( GLchar )* );
+    alias da_glGetObjectPtrLabelKHR = void function( const( void )*, GLsizei, GLsizei*, GLchar* );
     alias da_glGetPointervKHR = void function( GLenum, void** );
 }
 __gshared {
@@ -281,7 +281,7 @@ enum : uint {
 }
 extern( System ) nothrow {
     alias da_glGetProgramBinaryOES = void function( GLuint, GLsizei, GLsizei*, GLenum*, void* );
-    alias da_glProgramBinaryOES = void function( GLuint, GLenum, const void*, GLint );
+    alias da_glProgramBinaryOES = void function( GLuint, GLenum, const( void )*, GLint );
 }
 __gshared {
     da_glGetProgramBinaryOES glGetProgramBinaryOES;
@@ -427,11 +427,11 @@ enum : uint {
     GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES = 0x8CD4,
 }
 extern( System ) nothrow {
-    alias da_glTexImage3DOES = void function( GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const void* );
-    alias da_glTexSubImage3DOES = void function( GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const void* );
+    alias da_glTexImage3DOES = void function( GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLint, GLenum, GLenum, const( void )* );
+    alias da_glTexSubImage3DOES = void function( GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLenum, GLenum, const( void )* );
     alias da_glCopyTexSubImage3DOES = void function( GLenum, GLint, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei );
-    alias da_glCompressedTexImage3DOES = void function( GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLint, GLsizei, const void* );
-    alias da_glCompressedTexSubImage3DOES = void function( GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLenum, GLsizei, const void* );
+    alias da_glCompressedTexImage3DOES = void function( GLenum, GLint, GLenum, GLsizei, GLsizei, GLsizei, GLint, GLsizei, const( void )* );
+    alias da_glCompressedTexSubImage3DOES = void function( GLenum, GLint, GLint, GLint, GLint, GLsizei, GLsizei, GLsizei, GLenum, GLsizei, const( void )* );
     alias da_glFramebufferTexture3DOES = void function( GLenum, GLenum, GLenum, GLuint, GLint, GLint );
 }
 __gshared {
@@ -539,7 +539,7 @@ enum : uint {
 }
 extern( System ) nothrow {
     alias da_glBindVertexArrayOES = void function( GLuint );
-    alias da_glDeleteVertexArraysOES = void function( GLsizei, const GLuint* );
+    alias da_glDeleteVertexArraysOES = void function( GLsizei, const( GLuint )* );
     alias da_glGenVertexArraysOES = void function( GLsizei, GLuint* );
     alias da_glIsVertexArrayOES = GLboolean function( GLuint );
 }
@@ -707,7 +707,7 @@ enum : uint {
 }
 extern( System ) nothrow {
     alias da_glDrawArraysInstancedANGLE = void function( GLenum, GLint, GLsizei, GLsizei );
-    alias da_glDrawElementsInstancedANGLE = void function( GLenum, GLsizei, GLenum, const void*, GLsizei );
+    alias da_glDrawElementsInstancedANGLE = void function( GLenum, GLsizei, GLenum, const( void )*, GLsizei );
     alias da_glVertexAttribDivisorANGLE = void function( GLuint, GLuint );
 }
 __gshared {
@@ -964,7 +964,7 @@ enum : uint {
     GL_TRANSFORM_FEEDBACK             = 0x8E22,
 }
 extern( System ) nothrow {
-    alias da_glLabelObjectEXT = void function( GLenum, GLuint, GLsizei, const GLchar* );
+    alias da_glLabelObjectEXT = void function( GLenum, GLuint, GLsizei, const( GLchar )* );
     alias da_glGetObjectLabelEXT = void function( GLenum, GLuint, GLsizei, GLsizei*, GLchar* );
 }
 __gshared {
@@ -985,8 +985,8 @@ private void load_GL_EXT_debug_label() {
 private __gshared bool _GL_EXT_debug_marker;
 bool GL_EXT_debug_marker() @property { return _GL_EXT_debug_marker; }
 extern( System ) nothrow {
-    alias da_glInsertEventMarkerEXT = void function( GLsizei, const GLchar* );
-    alias da_glPushGroupMarkerEXT = void function( GLsizei, const GLchar* );
+    alias da_glInsertEventMarkerEXT = void function( GLsizei, const( GLchar )* );
+    alias da_glPushGroupMarkerEXT = void function( GLsizei, const( GLchar )* );
     alias da_glPopGroupMarkerEXT = void function(  );
 }
 __gshared {
@@ -1014,7 +1014,7 @@ enum : uint {
     GL_STENCIL_EXT                    = 0x1802,
 }
 extern( System ) nothrow {
-    alias da_glDiscardFramebufferEXT = void function( GLenum, GLsizei, const GLenum* );
+    alias da_glDiscardFramebufferEXT = void function( GLenum, GLsizei, const( GLenum )* );
 }
 __gshared {
     da_glDiscardFramebufferEXT glDiscardFramebufferEXT;
@@ -1042,7 +1042,7 @@ enum : uint {
 }
 extern( System ) nothrow {
     alias da_glGenQueriesEXT = void function( GLsizei, GLuint* );
-    alias da_glDeleteQueriesEXT = void function( GLsizei, const GLuint* );
+    alias da_glDeleteQueriesEXT = void function( GLsizei, const( GLuint )* );
     alias da_glIsQueryEXT = GLboolean function( GLuint );
     alias da_glBeginQueryEXT = void function( GLenum, GLuint );
     alias da_glEndQueryEXT = void function( GLenum );
@@ -1125,7 +1125,7 @@ enum : uint {
     GL_COLOR_ATTACHMENT15_EXT         = 0x8CEF,
 }
 extern( System ) nothrow {
-    alias da_glDrawBuffersEXT = void function( GLsizei, const GLenum* );
+    alias da_glDrawBuffersEXT = void function( GLsizei, const( GLenum )* );
 }
 __gshared {
     da_glDrawBuffersEXT glDrawBuffersEXT;
@@ -1144,7 +1144,7 @@ private __gshared bool _GL_EXT_draw_instanced;
 bool GL_EXT_draw_instanced() @property { return _GL_EXT_draw_instanced; }
 extern( System ) nothrow {
     alias da_glDrawArraysInstancedEXT = void function( GLenum, GLint, GLsizei, GLsizei );
-    alias da_glDrawElementsInstancedEXT = void function( GLenum, GLsizei, GLenum, const void*, GLsizei );
+    alias da_glDrawElementsInstancedEXT = void function( GLenum, GLsizei, GLenum, const( void )*, GLsizei );
 }
 __gshared {
     da_glDrawArraysInstancedEXT glDrawArraysInstancedEXT;
@@ -1214,8 +1214,8 @@ private void load_GL_EXT_map_buffer_range() {
 private __gshared bool _GL_EXT_multi_draw_arrays;
 bool GL_EXT_multi_draw_arrays() @property { return _GL_EXT_multi_draw_arrays; }
 extern( System ) nothrow {
-    alias da_glMultiDrawArraysEXT = void function( GLenum, const GLint*, const GLsizei*, GLsizei );
-    alias da_glMultiDrawElementsEXT = void function( GLenum, const GLsizei*, GLenum, const( const( void )* )*, GLsizei );
+    alias da_glMultiDrawArraysEXT = void function( GLenum, const( GLint )*, const( GLsizei )*, GLsizei );
+    alias da_glMultiDrawElementsEXT = void function( GLenum, const( GLsizei )*, GLenum, const( const( void )* )*, GLsizei );
 }
 __gshared {
     da_glMultiDrawArraysEXT glMultiDrawArraysEXT;
@@ -1270,7 +1270,7 @@ enum : uint {
 }
 extern( System ) nothrow {
     alias da_glReadBufferIndexedEXT = void function( GLenum, GLint );
-    alias da_glDrawBuffersIndexedEXT = void function( GLint, const GLenum*, const GLint* );
+    alias da_glDrawBuffersIndexedEXT = void function( GLint, const( GLenum )*, const( GLint )* );
     alias da_glGetIntegeri_vEXT = void function( GLenum, GLuint, GLint* );
 }
 __gshared {
@@ -1377,48 +1377,48 @@ enum : uint {
 extern( System ) nothrow {
     alias da_glActiveShaderProgramEXT = void function( GLuint, GLuint );
     alias da_glBindProgramPipelineEXT = void function( GLuint );
-    alias da_glCreateShaderProgramvEXT = GLuint function( GLenum, GLsizei, const GLchar** );
-    alias da_glDeleteProgramPipelinesEXT = void function( GLsizei, const GLuint* );
+    alias da_glCreateShaderProgramvEXT = GLuint function( GLenum, GLsizei, const( GLchar )** );
+    alias da_glDeleteProgramPipelinesEXT = void function( GLsizei, const( GLuint )* );
     alias da_glGenProgramPipelinesEXT = void function( GLsizei, GLuint* );
     alias da_glGetProgramPipelineInfoLogEXT = void function( GLuint, GLsizei, GLsizei*, GLchar* );
     alias da_glGetProgramPipelineivEXT = void function( GLuint, GLenum, GLint* );
     alias da_glIsProgramPipelineEXT = GLboolean function( GLuint );
     alias da_glProgramParameteriEXT = void function( GLuint, GLenum, GLint );
     alias da_glProgramUniform1fEXT = void function( GLuint, GLint, GLfloat );
-    alias da_glProgramUniform1fvEXT = void function( GLuint, GLint, GLsizei, const GLfloat* );
+    alias da_glProgramUniform1fvEXT = void function( GLuint, GLint, GLsizei, const( GLfloat )* );
     alias da_glProgramUniform1iEXT = void function( GLuint, GLint, GLint );
-    alias da_glProgramUniform1ivEXT = void function( GLuint, GLint, GLsizei, const GLint* );
+    alias da_glProgramUniform1ivEXT = void function( GLuint, GLint, GLsizei, const( GLint )* );
     alias da_glProgramUniform2fEXT = void function( GLuint, GLint, GLfloat, GLfloat );
-    alias da_glProgramUniform2fvEXT = void function( GLuint, GLint, GLsizei, const GLfloat* );
+    alias da_glProgramUniform2fvEXT = void function( GLuint, GLint, GLsizei, const( GLfloat )* );
     alias da_glProgramUniform2iEXT = void function( GLuint, GLint, GLint, GLint );
-    alias da_glProgramUniform2ivEXT = void function( GLuint, GLint, GLsizei, const GLint* );
+    alias da_glProgramUniform2ivEXT = void function( GLuint, GLint, GLsizei, const( GLint )* );
     alias da_glProgramUniform3fEXT = void function( GLuint, GLint, GLfloat, GLfloat, GLfloat );
-    alias da_glProgramUniform3fvEXT = void function( GLuint, GLint, GLsizei, const GLfloat* );
+    alias da_glProgramUniform3fvEXT = void function( GLuint, GLint, GLsizei, const( GLfloat )* );
     alias da_glProgramUniform3iEXT = void function( GLuint, GLint, GLint, GLint, GLint );
-    alias da_glProgramUniform3ivEXT = void function( GLuint, GLint, GLsizei, const GLint* );
+    alias da_glProgramUniform3ivEXT = void function( GLuint, GLint, GLsizei, const( GLint )* );
     alias da_glProgramUniform4fEXT = void function( GLuint, GLint, GLfloat, GLfloat, GLfloat, GLfloat );
-    alias da_glProgramUniform4fvEXT = void function( GLuint, GLint, GLsizei, const GLfloat* );
+    alias da_glProgramUniform4fvEXT = void function( GLuint, GLint, GLsizei, const( GLfloat )* );
     alias da_glProgramUniform4iEXT = void function( GLuint, GLint, GLint, GLint, GLint, GLint );
-    alias da_glProgramUniform4ivEXT = void function( GLuint, GLint, GLsizei, const GLint* );
-    alias da_glProgramUniformMatrix2fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glProgramUniformMatrix3fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glProgramUniformMatrix4fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
+    alias da_glProgramUniform4ivEXT = void function( GLuint, GLint, GLsizei, const( GLint )* );
+    alias da_glProgramUniformMatrix2fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glProgramUniformMatrix3fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glProgramUniformMatrix4fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
     alias da_glUseProgramStagesEXT = void function( GLuint, GLbitfield, GLuint );
     alias da_glValidateProgramPipelineEXT = void function( GLuint );
     alias da_glProgramUniform1uiEXT = void function( GLuint, GLint, GLuint );
     alias da_glProgramUniform2uiEXT = void function( GLuint, GLint, GLuint, GLuint );
     alias da_glProgramUniform3uiEXT = void function( GLuint, GLint, GLuint, GLuint, GLuint );
     alias da_glProgramUniform4uiEXT = void function( GLuint, GLint, GLuint, GLuint, GLuint, GLuint );
-    alias da_glProgramUniform1uivEXT = void function( GLuint, GLint, GLsizei, const GLuint* );
-    alias da_glProgramUniform2uivEXT = void function( GLuint, GLint, GLsizei, const GLuint* );
-    alias da_glProgramUniform3uivEXT = void function( GLuint, GLint, GLsizei, const GLuint* );
-    alias da_glProgramUniform4uivEXT = void function( GLuint, GLint, GLsizei, const GLuint* );
-    alias da_glProgramUniformMatrix2x3fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glProgramUniformMatrix3x2fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glProgramUniformMatrix2x4fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glProgramUniformMatrix4x2fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glProgramUniformMatrix3x4fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glProgramUniformMatrix4x3fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const GLfloat* );
+    alias da_glProgramUniform1uivEXT = void function( GLuint, GLint, GLsizei, const( GLuint )* );
+    alias da_glProgramUniform2uivEXT = void function( GLuint, GLint, GLsizei, const( GLuint )* );
+    alias da_glProgramUniform3uivEXT = void function( GLuint, GLint, GLsizei, const( GLuint )* );
+    alias da_glProgramUniform4uivEXT = void function( GLuint, GLint, GLsizei, const( GLuint )* );
+    alias da_glProgramUniformMatrix2x3fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glProgramUniformMatrix3x2fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glProgramUniformMatrix2x4fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glProgramUniformMatrix4x2fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glProgramUniformMatrix3x4fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glProgramUniformMatrix4x3fvEXT = void function( GLuint, GLint, GLsizei, GLboolean, const( GLfloat )* );
 }
 __gshared {
     da_glActiveShaderProgramEXT glActiveShaderProgramEXT;
@@ -1963,7 +1963,7 @@ enum : uint {
     GL_COLOR_ATTACHMENT15_NV          = 0x8CEF,
 }
 extern( System ) nothrow {
-    alias da_glDrawBuffersNV = void function( GLsizei, const GLenum* );
+    alias da_glDrawBuffersNV = void function( GLsizei, const( GLenum )* );
 }
 __gshared {
     da_glDrawBuffersNV glDrawBuffersNV;
@@ -1982,7 +1982,7 @@ private __gshared bool _GL_NV_draw_instanced;
 bool GL_NV_draw_instanced() @property { return _GL_NV_draw_instanced; }
 extern( System ) nothrow {
     alias da_glDrawArraysInstancedNV = void function( GLenum, GLint, GLsizei, GLsizei );
-    alias da_glDrawElementsInstancedNV = void function( GLenum, GLsizei, GLenum, const void*, GLsizei );
+    alias da_glDrawElementsInstancedNV = void function( GLenum, GLsizei, GLenum, const( void )*, GLsizei );
 }
 __gshared {
     da_glDrawArraysInstancedNV glDrawArraysInstancedNV;
@@ -2016,7 +2016,7 @@ enum : uint {
     GL_FENCE_CONDITION_NV             = 0x84F4,
 }
 extern( System ) nothrow {
-    alias da_glDeleteFencesNV = void function( GLsizei, const GLuint* );
+    alias da_glDeleteFencesNV = void function( GLsizei, const( GLuint )* );
     alias da_glGenFencesNV = void function( GLsizei, GLuint* );
     alias da_glIsFenceNV = GLboolean function( GLuint );
     alias da_glTestFenceNV = GLboolean function( GLuint );
@@ -2131,12 +2131,12 @@ enum : uint {
     GL_FLOAT_MAT4x3_NV                = 0x8B6A,
 }
 extern( System ) nothrow {
-    alias da_glUniformMatrix2x3fvNV = void function( GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glUniformMatrix3x2fvNV = void function( GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glUniformMatrix2x4fvNV = void function( GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glUniformMatrix4x2fvNV = void function( GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glUniformMatrix3x4fvNV = void function( GLint, GLsizei, GLboolean, const GLfloat* );
-    alias da_glUniformMatrix4x3fvNV = void function( GLint, GLsizei, GLboolean, const GLfloat* );
+    alias da_glUniformMatrix2x3fvNV = void function( GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glUniformMatrix3x2fvNV = void function( GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glUniformMatrix2x4fvNV = void function( GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glUniformMatrix4x2fvNV = void function( GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glUniformMatrix3x4fvNV = void function( GLint, GLsizei, GLboolean, const( GLfloat )* );
+    alias da_glUniformMatrix4x3fvNV = void function( GLint, GLsizei, GLboolean, const( GLfloat )* );
 }
 __gshared {
     da_glUniformMatrix2x3fvNV glUniformMatrix2x3fvNV;
