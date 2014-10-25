@@ -47,7 +47,10 @@ private {
 
 class DerelictGLES2Loader : SharedLibLoader
 {
-    private GLESVersion _loadedVersion;
+    protected GLESVersion _loadedVersion;
+    protected this( string libNames ) {
+        super( libNames );
+    }
 
     public
     {
@@ -60,7 +63,7 @@ class DerelictGLES2Loader : SharedLibLoader
         }
 
         GLESVersion reload() {
-            loadEXT(  );
+            loadEXT2(  );
 
             return _loadedVersion;
         }
