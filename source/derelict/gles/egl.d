@@ -281,76 +281,57 @@ enum EGLVersion {
 
 /* EGL Functions */
 extern( System ) nothrow {
-    alias EGLint function(  ) da_eglGetError;
-    alias EGLDisplay function( EGLNativeDisplayType ) da_eglGetDisplay;
-    alias EGLBoolean function( EGLDisplay, EGLint*, EGLint* ) da_eglInitialize;
-    alias EGLBoolean function( EGLDisplay ) da_eglTerminate;
-    alias const( char )* function( EGLDisplay, EGLint ) da_eglQueryString;
-    alias EGLBoolean function( EGLDisplay, EGLConfig*,
-                               EGLint, EGLint* ) da_eglGetConfigs;
-    alias EGLBoolean function( EGLDisplay, const EGLint*,
-                               EGLConfig*, EGLint,
-                               EGLint* ) da_eglChooseConfig;
-    alias EGLBoolean function( EGLDisplay, EGLConfig,
-                               EGLint, EGLint* ) da_eglGetConfigAttrib;
-    alias EGLSurface function( EGLDisplay, EGLConfig,
-                               EGLNativeWindowType,
-                               const EGLint* ) da_eglCreateWindowSurface;
-    alias EGLSurface function( EGLDisplay, EGLConfig,
-                               const EGLint* ) da_eglCreatePbufferSurface;
-    alias EGLSurface function( EGLDisplay, EGLConfig,
-                               EGLNativePixmapType,
-                               const EGLint* ) da_eglCreatePixmapSurface;
-    alias EGLBoolean function( EGLDisplay, EGLSurface ) da_eglDestroySurface;
-    alias EGLBoolean function( EGLDisplay, EGLSurface,
-                               EGLint, EGLint* ) da_eglQuerySurface;
-    alias EGLBoolean function( EGLenum ) da_eglBindAPI;
-    alias EGLenum function(  ) da_eglQueryAPI;
-    alias EGLBoolean function(  ) da_eglWaitClient;
-    alias EGLBoolean function(  ) da_eglReleaseThread;
-    alias EGLSurface function(
-                        EGLDisplay, EGLenum, EGLClientBuffer,
-                        EGLConfig, const EGLint* ) da_eglCreatePbufferFromClientBuffer;
-    alias EGLBoolean function( EGLDisplay, EGLSurface,
-                               EGLint, EGLint ) da_eglSurfaceAttrib;
-    alias EGLBoolean function( EGLDisplay, EGLSurface, EGLint ) da_eglBindTexImage;
-    alias EGLBoolean function( EGLDisplay, EGLSurface, EGLint ) da_eglReleaseTexImage;
-    alias EGLBoolean function( EGLDisplay, EGLint ) da_eglSwapInterval;
-    alias EGLContext function( EGLDisplay, EGLConfig,
-                               EGLContext,
-                               const EGLint* ) da_eglCreateContext;
-    alias EGLBoolean function( EGLDisplay, EGLContext ) da_eglDestroyContext;
-    alias EGLBoolean function( EGLDisplay, EGLSurface,
-                               EGLSurface, EGLContext ) da_eglMakeCurrent;
-    alias EGLContext function(  ) da_eglGetCurrentContext;
-    alias EGLSurface function( EGLint ) da_eglGetCurrentSurface;
-    alias EGLDisplay function(  ) da_eglGetCurrentDisplay;
-    alias EGLBoolean function( EGLDisplay, EGLContext,
-                               EGLint, EGLint* ) da_eglQueryContext;
-    alias EGLBoolean function(  ) da_eglWaitGL;
-    alias EGLBoolean function( EGLint ) da_eglWaitNative;
-    alias EGLBoolean function( EGLDisplay, EGLSurface ) da_eglSwapBuffers;
-    alias EGLBoolean function( EGLDisplay, EGLSurface,
-                               EGLNativePixmapType ) da_eglCopyBuffers;
+    alias da_eglGetError = EGLint function(  );
+    alias da_eglGetDisplay = EGLDisplay function( EGLNativeDisplayType );
+    alias da_eglInitialize = EGLBoolean function( EGLDisplay, EGLint*, EGLint* );
+    alias da_eglTerminate = EGLBoolean function( EGLDisplay );
+    alias da_eglQueryString = const( char )* function( EGLDisplay, EGLint );
+    alias da_eglGetConfigs = EGLBoolean function( EGLDisplay, EGLConfig*, EGLint, EGLint* );
+    alias da_eglChooseConfig = EGLBoolean function( EGLDisplay, const( EGLint )*, EGLConfig*, EGLint, EGLint* );
+    alias da_eglGetConfigAttrib = EGLBoolean function( EGLDisplay, EGLConfig, EGLint, EGLint* );
+    alias da_eglCreateWindowSurface = EGLSurface function( EGLDisplay, EGLConfig, EGLNativeWindowType, const( EGLint )* );
+    alias da_eglCreatePbufferSurface = EGLSurface function( EGLDisplay, EGLConfig, const( EGLint )* );
+    alias da_eglCreatePixmapSurface = EGLSurface function( EGLDisplay, EGLConfig, EGLNativePixmapType, const( EGLint )* );
+    alias da_eglDestroySurface = EGLBoolean function( EGLDisplay, EGLSurface );
+    alias da_eglQuerySurface = EGLBoolean function( EGLDisplay, EGLSurface, EGLint, EGLint* );
+    alias da_eglBindAPI = EGLBoolean function( EGLenum );
+    alias da_eglQueryAPI = EGLenum function(  );
+    alias da_eglWaitClient = EGLBoolean function(  );
+    alias da_eglReleaseThread = EGLBoolean function(  );
+    alias da_eglCreatePbufferFromClientBuffer = EGLSurface function( EGLDisplay, EGLenum, EGLClientBuffer, EGLConfig, const( EGLint )* );
+    alias da_eglSurfaceAttrib = EGLBoolean function( EGLDisplay, EGLSurface, EGLint, EGLint );
+    alias da_eglBindTexImage = EGLBoolean function( EGLDisplay, EGLSurface, EGLint );
+    alias da_eglReleaseTexImage = EGLBoolean function( EGLDisplay, EGLSurface, EGLint );
+    alias da_eglSwapInterval = EGLBoolean function( EGLDisplay, EGLint );
+    alias da_eglCreateContext = EGLContext function( EGLDisplay, EGLConfig, EGLContext, const( EGLint )* );
+    alias da_eglDestroyContext = EGLBoolean function( EGLDisplay, EGLContext );
+    alias da_eglMakeCurrent = EGLBoolean function( EGLDisplay, EGLSurface, EGLSurface, EGLContext );
+    alias da_eglGetCurrentContext = EGLContext function(  );
+    alias da_eglGetCurrentSurface = EGLSurface function( EGLint );
+    alias da_eglGetCurrentDisplay = EGLDisplay function(  );
+    alias da_eglQueryContext = EGLBoolean function( EGLDisplay, EGLContext, EGLint, EGLint* );
+    alias da_eglWaitGL = EGLBoolean function(  );
+    alias da_eglWaitNative = EGLBoolean function( EGLint );
+    alias da_eglSwapBuffers = EGLBoolean function( EGLDisplay, EGLSurface );
+    alias da_eglCopyBuffers = EGLBoolean function( EGLDisplay, EGLSurface, EGLNativePixmapType );
 
     /* This is a generic function pointer type, whose name indicates it must
      * be cast to the proper type *and calling convention* before use.
      */
-    alias void function(  ) __eglMustCastToProperFunctionPointerType;
+    alias __eglMustCastToProperFunctionPointerType = void function(  );
 
     /* Now, define eglGetProcAddress using the generic function ptr. type */
-    alias __eglMustCastToProperFunctionPointerType
-           function( const char* ) da_eglGetProcAddress;
+    alias da_eglGetProcAddress = __eglMustCastToProperFunctionPointerType function( const( char )* );
 
     /* EGL 1.5 */
-    alias EGLSync function ( EGLDisplay, EGLenum, const EGLAttrib* ) da_eglCreateSync;
-    alias EGLBoolean function ( EGLDisplay, EGLSync ) da_eglDestroySync;
-    alias EGLint function ( EGLDisplay, EGLSync, EGLint, EGLTime ) da_eglClientWaitSync;
-    alias EGLBoolean function ( EGLDisplay, EGLSync, EGLint, EGLAttrib* ) da_eglGetSyncAttrib;
-    alias EGLDisplay function ( EGLenum, void*, const EGLAttrib* ) da_eglGetPlatformDisplay;
-    alias EGLSurface function ( EGLDisplay, EGLConfig, void*, const EGLAttrib* ) da_eglCreatePlatformWindowSurface;
-    alias EGLSurface function ( EGLDisplay, EGLConfig, void*, const EGLAttrib* ) da_eglCreatePlatformPixmapSurface;
-    alias EGLBoolean function ( EGLDisplay, EGLSync, EGLint ) da_eglWaitSync;
+    alias da_eglCreateSync = EGLSync function ( EGLDisplay, EGLenum, const( EGLAttrib )* );
+    alias da_eglDestroySync = EGLBoolean function ( EGLDisplay, EGLSync );
+    alias da_eglClientWaitSync = EGLint function ( EGLDisplay, EGLSync, EGLint, EGLTime );
+    alias da_eglGetSyncAttrib = EGLBoolean function ( EGLDisplay, EGLSync, EGLint, EGLAttrib* );
+    alias da_eglGetPlatformDisplay = EGLDisplay function ( EGLenum, void*, const( EGLAttrib )* );
+    alias da_eglCreatePlatformWindowSurface = EGLSurface function ( EGLDisplay, EGLConfig, void*, const( EGLAttrib )* );
+    alias da_eglCreatePlatformPixmapSurface = EGLSurface function ( EGLDisplay, EGLConfig, void*, const( EGLAttrib )* );
+    alias da_eglWaitSync = EGLBoolean function ( EGLDisplay, EGLSync, EGLint );
 }
 
 __gshared {
