@@ -2433,7 +2433,7 @@ enum : uint {
     GL_SHADER_BINARY_VIV              = 0x8FC4,
 }
 
-package void loadEXT(  ) {
+package void loadEXT2(  ) {
     _GL_KHR_blend_equation_advanced = isExtSupported( "GL_KHR_blend_equation_advanced" );
     if( _GL_KHR_blend_equation_advanced ) load_GL_KHR_blend_equation_advanced();
     _GL_KHR_debug = isExtSupported( "GL_KHR_debug" );

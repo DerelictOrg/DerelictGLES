@@ -60,7 +60,7 @@ class DerelictGLES2Loader : SharedLibLoader
         }
 
         GLESVersion reload() {
-            loadEXT(  );
+            loadEXT2(  );
 
             return _loadedVersion;
         }
