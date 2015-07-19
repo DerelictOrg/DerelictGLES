@@ -47,8 +47,13 @@ private {
         static assert( 0, "Need to implement OpenGLESv2 libNames for this operating system." );
 }
 
+alias GLESSymbolLoader = void* function(string);
+
 class DerelictGLES2Loader : SharedLibLoader {
-    private GLESVersion _loadedVersion;
+    private {
+        GLESVersion _loadedVersion;
+        GLESSymbolLoader _symLoader;
+    }
 
     public {
         this() {
@@ -63,6 +68,20 @@ class DerelictGLES2Loader : SharedLibLoader {
             loadEXT(  );
 
             return _loadedVersion;
+        }
+
+        void load(GLESSymbolLoader loader) {
+            import std.stdio;
+            writeln("It's on, brother!");
+            _symLoader = loader;
+            loadSymbols();
+        }
+
+        protected override void* loadSymbol(string name, bool doThrow = true) {
+            import std.stdio : writeln;
+            writeln("Loading ", name);
+            if(_symLoader) return _symLoader(name);
+            else return super.loadSymbol(name, doThrow);
         }
 
         protected override void loadSymbols() {
