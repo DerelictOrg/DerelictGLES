@@ -27,11 +27,9 @@ DEALINGS IN THE SOFTWARE.
 */
 module derelict.gles.eglext;
 
-private {
-    import derelict.gles.egltypes;
-    import derelict.gles.internal;
-    import core.stdc.stdint;
-}
+import derelict.gles.egltypes;
+import derelict.gles.internal;
+import core.stdc.stdint;
 
 private __gshared bool _EGL_KHR_cl_event;
 bool EGL_KHR_cl_event() @property { return _EGL_KHR_cl_event; }

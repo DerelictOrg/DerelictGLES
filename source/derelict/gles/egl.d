@@ -27,20 +27,20 @@ DEALINGS IN THE SOFTWARE.
 */
 module derelict.gles.egl;
 
-public {
-    import derelict.gles.eglext;
-    import derelict.gles.egltypes;
-}
+public import derelict.gles.eglext,
+              derelict.gles.egltypes;
+
+import std.conv;
+import derelict.util.loader,
+       derelict.util.exception,
+       derelict.util.system;
 
 private {
-    import derelict.util.loader;
-    import derelict.util.exception;
-    import derelict.util.system;
-    import std.conv;
-
-    static if( Derelict_OS_Posix ) {
+    static if( Derelict_OS_Windows )
+        enum libNames = "libegl.dll";
+    else static if( Derelict_OS_Posix && !Derelict_OS_Mac )
         enum libNames = "libEGL.so.1,libEGL.so";
-    } else
+    else
         static assert( 0, "Need to implement EGL libNames for this operating system." );
 }
 

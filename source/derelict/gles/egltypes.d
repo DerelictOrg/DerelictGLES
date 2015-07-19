@@ -27,13 +27,9 @@ DEALINGS IN THE SOFTWARE.
 */
 module derelict.gles.egltypes;
 
-public {
-    import derelict.gles.eglplatform;
-}
+public import derelict.gles.eglplatform;
 
-private {
-    import core.stdc.stdint;
-}
+import core.stdc.stdint;
 
 alias EGLBoolean = uint;
 alias EGLenum = uint;

@@ -27,11 +27,18 @@ DEALINGS IN THE SOFTWARE.
 */
 module derelict.gles.eglplatform;
 
-private {
-    import derelict.util.system;
-}
+import derelict.util.system;
 
-static if( Derelict_OS_Android ) {
+static if(Derelict_OS_Windows) {
+    alias EGLint = int;
+
+    // No need to pull in core.sys.windows.windows here --
+    // handles are all void*
+    alias EGLNativeDisplayType = void*; // HDC
+    alias EGLNativePixmapType = void*;  // HBITMAP
+    alias EGLNativeWindowType = void*;  // HWND
+}
+else static if( Derelict_OS_Android ) {
     alias EGLint = int;
 
     struct ANativeWindow;
@@ -40,7 +47,8 @@ static if( Derelict_OS_Android ) {
     alias EGLNativeWindowType = ANativeWindow*;
     alias EGLNativePixmapType = egl_native_pixmap_t*;
     alias EGLNativeDisplayType = void*;
-} else static if( Derelict_OS_Posix ) {
+}
+else static if( Derelict_OS_Posix && Derelict_OS_Mac ) {
     alias EGLint = int;
 
     // static if( wayland ) {
@@ -59,5 +67,6 @@ static if( Derelict_OS_Android ) {
     alias EGLNativePixmapType = uint;
     alias EGLNativeDisplayType = uint;
     // }
-} else
+}
+else
     static assert( 0, "Need to implement EGL types for this operating system." );

@@ -39,18 +39,18 @@ private {
     import derelict.util.exception;
     import derelict.util.system;
 
-    static if( Derelict_OS_Posix ) {
+    static if( Derelict_OS_Windows )
+        enum libNames = "libglesv2.dll";
+    else static if( Derelict_OS_Posix && !Derelict_OS_Mac )
         enum libNames = "libGLESv2.so.2,libGLESv2.so";
-    } else
+    else
         static assert( 0, "Need to implement OpenGLESv2 libNames for this operating system." );
 }
 
-class DerelictGLES2Loader : SharedLibLoader
-{
+class DerelictGLES2Loader : SharedLibLoader {
     private GLESVersion _loadedVersion;
 
-    public
-    {
+    public {
         this() {
             super( libNames );
         }
