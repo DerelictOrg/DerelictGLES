@@ -46,8 +46,8 @@ package {
     }
 
     bool isExtSupported( string name ) {
-        const( GLubyte )* ext = glGetString( GL_EXTENSIONS );
-        return checkExt( cast( const( char )* ) ext, name );
+        auto ext = glGetString( GL_EXTENSIONS );
+        return checkExt( ext, name );
     }
 
     bool isEGLExtSupported( EGLDisplay disp, string name ) {

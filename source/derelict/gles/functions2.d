@@ -103,7 +103,7 @@ extern( System ) nothrow {
     alias da_glGetShaderInfoLog = void function( GLuint, GLsizei, GLsizei*, GLchar*infoLog );
     alias da_glGetShaderPrecisionFormat = void function( GLenum, GLenum, GLint*, GLint* );
     alias da_glGetShaderSource = void function( GLuint, GLsizei, GLsizei*, GLchar* );
-    alias da_glGetString = const( GLubyte )* function( GLenum );
+    alias da_glGetString = const( char )* function( GLenum );
     alias da_glGetTexParameterfv = void function( GLenum, GLenum, GLfloat* );
     alias da_glGetTexParameteriv = void function( GLenum, GLenum, GLint* );
     alias da_glGetUniformfv = void function( GLuint, GLint, GLfloat* );
