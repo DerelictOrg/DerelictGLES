@@ -48,7 +48,7 @@ else static if( Derelict_OS_Android ) {
     alias EGLNativePixmapType = egl_native_pixmap_t*;
     alias EGLNativeDisplayType = void*;
 }
-else static if( Derelict_OS_Posix && Derelict_OS_Mac ) {
+else static if( Derelict_OS_Posix && !Derelict_OS_Mac ) {
     alias EGLint = int;
 
     // static if( wayland ) {
