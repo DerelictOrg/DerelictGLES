@@ -13,5 +13,21 @@
 
     "dependencies": {
         "derelict-util": "~>2.0.1"
-    }
+    },
+
+    "configurations": [
+        {
+            "name": "x11",
+            "platforms": ["linux"],
+            "versions": ["EglX11"]
+        },
+        {
+            "name": "wayland",
+            "platforms": ["linux"],
+            "versions": ["EglWayland"]
+        },
+        {
+            "name": "library"
+        }
+    ]
 }
