@@ -51,22 +51,22 @@ else static if( Derelict_OS_Android ) {
 else static if( Derelict_OS_Posix && !Derelict_OS_Mac ) {
     alias EGLint = int;
 
-    // static if( wayland ) {
-    // struct wl_display;
-    // struct wl_egl_pixmap;
-    // struct wl_egl_window;
+    // There are multiple bindings to X11, no need to give preference.
+    // Client code must cast to void*
+    version (EglWayland)
+    {
+        alias EGLNativeDisplayType = void*;     // wl_display*
+        alias EGLNativeWindowType = void*;      // wl_egl_window*
+        alias EGLNativePixmapType = void*;      // should not be used
+    }
 
-    // alias EGLNativeWindowType = wl_display*;
-    // alias EGLNativePixmapType = wl_egl_pixmap*;
-    // alias EGLNativeDisplayType = wl_egl_window*;
-    // } else {
-    // FIXME: Assume X for now.
-    struct Display;
-
-    alias EGLNativeWindowType = Display*;
-    alias EGLNativePixmapType = uint;
-    alias EGLNativeDisplayType = uint;
-    // }
+    version(EglX11)
+    {
+        alias EGLNativeDisplayType = void*;     // Display*
+        alias EGLNativeWindowType = uint;       // Window
+        alias EGLNativePixmapType = uint;       // Pixmap
+    }
 }
-else
+else {
     static assert( 0, "Need to implement EGL types for this operating system." );
+}
